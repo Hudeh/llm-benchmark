@@ -1,0 +1,7 @@
+.history/
+.history
+history*
+venv/
+.env
+helm
+scripts
