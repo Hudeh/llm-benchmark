@@ -38,7 +38,7 @@ Change the env_sample file name to .env:
     Redis as the Celery message broker.
     Access the API documentation at <http://localhost:8000/docs>
 
-2. **Run FastAPI Locally**
+2. **Running FastAPI Locally**
 
 ## Set up a Python virtual environment
 
@@ -77,3 +77,25 @@ celery -A app.tasks.celery_tasks beat --loglevel=info
 ```bash
 alembic upgrade head
 ```
+
+## Sample Output
+
+GET /api/v1/rankings/TTFT/
+
+[
+    {
+        "llm": "GPT-4o",
+        "mean_value": 0.523,
+        "rank": 1
+    },
+    {
+        "llm": "Llama 3.1 405",
+        "mean_value": 0.612,
+        "rank": 2
+    },
+    {
+        "llm": "Mistral Large2",
+        "mean_value": 0.745,
+        "rank": 3
+    }
+]
