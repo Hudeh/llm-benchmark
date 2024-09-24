@@ -201,3 +201,39 @@ The API allows interaction with the simulation system through the following endp
    ```bash
    npm start
    ```
+
+## Monitoring and Logging
+
+1. **Monitoring with Prometheus and Grafana**
+    Install Prometheus and Grafana using Helm:
+
+    ```bash
+    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+    helm repo update
+
+    # Install Prometheus
+    helm install prometheus prometheus-community/prometheus --namespace monitoring
+
+    # Install Grafana
+    helm install grafana grafana/grafana --namespace monitoring
+    ```
+
+2. **Logging with ELK Stack**
+    Install the ELK stack (Elasticsearch, Logstash, Kibana) using Helm:
+
+    ```bash
+    helm repo add elastic <https://helm.elastic.co>
+    helm repo update
+    ```
+
+    Install Elasticsearch
+
+    ```bash
+    helm install elasticsearch elastic/elasticsearch --namespace logging
+    ```
+
+    Install Kibana
+
+    ```bash
+    helm install kibana elastic/kibana --namespace logging
+    ```
