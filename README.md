@@ -222,7 +222,7 @@ The API allows interaction with the simulation system through the following endp
     Install the ELK stack (Elasticsearch, Logstash, Kibana) using Helm:
 
     ```bash
-    helm repo add elastic <https://helm.elastic.co>
+    helm repo add elastic https://helm.elastic.co
     helm repo update
     ```
 
