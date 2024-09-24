@@ -13,7 +13,7 @@ import {
 // Register necessary components
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const MetricChart = ({ data }) => {
+const MetricChart = ({ data, metricName }) => {
   const chartData = {
     labels: data.map((item) => item.llm),
     datasets: [
@@ -57,7 +57,7 @@ const MetricChart = ({ data }) => {
 
   return (
     <div>
-      <h3>Metric Chart</h3>
+      <h3>{metricName} Chart</h3>
       <Bar data={chartData} options={options} />
     </div>
   );

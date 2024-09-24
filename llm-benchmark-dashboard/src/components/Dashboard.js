@@ -4,6 +4,7 @@ import MetricChart from './MetricChart';
 
 const Dashboard = () => {
   const [metrics, setMetrics] = useState([]);
+  const [metricName, setMetricName] = useState('');
   const [rankings, setRankings] = useState({});
 
   useEffect(() => {
@@ -27,7 +28,10 @@ const Dashboard = () => {
         {metrics.map((metric) => (
           <div
             key={metric.name}
-            onClick={() => handleMetricClick(metric.name)}
+            onClick={() => {
+              handleMetricClick(metric.name);
+              setMetricName(metric.name);
+            }}
             style={{
               cursor: 'pointer',
               padding: '10px',
@@ -51,7 +55,11 @@ const Dashboard = () => {
         ))}
       </div>
       {Object.keys(rankings).map((metricName) => (
-        <MetricChart key={metricName} data={rankings[metricName]} />
+        <MetricChart
+          key={metricName}
+          data={rankings[metricName]}
+          metricName={metricName}
+        />
       ))}
     </div>
   );
