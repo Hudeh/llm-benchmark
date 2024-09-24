@@ -1,7 +1,5 @@
-# .env
-
 # PostgreSQL settings
-POSTGRES_DB=llm_benchmark
+POSTGRES_DB=llm_db_benchmark
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 
@@ -11,7 +9,7 @@ PROJECT_DESCRIPTION="Benchmarking various LLMs against quality metrics."
 PROJECT_VERSION="1.0.0"
 
 # Database URL for SQLAlchemy
-DATABASE_URL=postgresql://postgres:postgres@db:5432/llm_benchmark
+DATABASE_URL=postgresql://postgres:postgres@db:5432/llm_db_benchmark
 
 # Redis settings
 REDIS_URL=redis://redis:6379

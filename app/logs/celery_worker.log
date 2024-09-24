@@ -1,87 +1,50 @@
-[2024-09-22 13:34:33,912: WARNING/MainProcess] /usr/local/lib/python3.12/site-packages/celery/worker/consumer/consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
-whether broker connection retries are made during startup in Celery 6.0 and above.
-If you wish to retain the existing behavior for retrying connections on startup,
-you should set broker_connection_retry_on_startup to True.
-  warnings.warn(
+[2024-09-24 11:17:54,825: INFO/ForkPoolWorker-1] simulation-queue[941ed4b4-c587-49d3-a766-8d859d3273ef]: Running simulation: Test Simulation with count 1000 and seed 42
+[2024-09-24 11:18:00,325: ERROR/ForkPoolWorker-1] simulation-queue[941ed4b4-c587-49d3-a766-8d859d3273ef]: Simulation 'Test Simulation' task failed with error: Session.bulk_save_objects() got an unexpected keyword argument 'batch_size'
+[2024-09-24 11:18:00,326: ERROR/ForkPoolWorker-1] simulation-queue[941ed4b4-c587-49d3-a766-8d859d3273ef]: Max retries reached for task 941ed4b4-c587-49d3-a766-8d859d3273ef. Marking as failed.
+[2024-09-24 11:18:00,394: INFO/ForkPoolWorker-1] Task simulation-queue[941ed4b4-c587-49d3-a766-8d859d3273ef] succeeded in 5.569957090000116s: 'Simulation \'Test Simulation\' failed after 3 retries.'
+[2024-09-24 11:18:08,649: INFO/MainProcess] Task simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55] received
+[2024-09-24 11:18:08,662: INFO/ForkPoolWorker-1] simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55]: Running simulation: Test Simulation with count 1000 and seed 42
+[2024-09-24 11:18:11,222: ERROR/ForkPoolWorker-1] simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55]: Simulation 'Test Simulation' task failed with error: Session.bulk_save_objects() got an unexpected keyword argument 'batch_size'
+[2024-09-24 11:18:11,227: INFO/MainProcess] Task simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55] received
+[2024-09-24 11:18:11,237: INFO/ForkPoolWorker-1] Task simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55] retry: Retry in 60s: TypeError("Session.bulk_save_objects() got an unexpected keyword argument 'batch_size'")
+[2024-09-24 11:18:42,654: INFO/ForkPoolWorker-1] simulation-queue[5ad6c07f-69dc-4c5f-83c0-0bbbd48b06db]: Running simulation: Test Simulation with count 1000 and seed 42
+[2024-09-24 11:18:45,558: ERROR/ForkPoolWorker-1] simulation-queue[5ad6c07f-69dc-4c5f-83c0-0bbbd48b06db]: Simulation 'Test Simulation' task failed with error: Session.bulk_save_objects() got an unexpected keyword argument 'batch_size'
+[2024-09-24 11:18:45,564: INFO/MainProcess] Task simulation-queue[5ad6c07f-69dc-4c5f-83c0-0bbbd48b06db] received
+[2024-09-24 11:18:45,572: INFO/ForkPoolWorker-1] Task simulation-queue[5ad6c07f-69dc-4c5f-83c0-0bbbd48b06db] retry: Retry in 60s: TypeError("Session.bulk_save_objects() got an unexpected keyword argument 'batch_size'")
+[2024-09-24 11:19:11,227: INFO/ForkPoolWorker-1] simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55]: Running simulation: Test Simulation with count 1000 and seed 42
+[2024-09-24 11:19:13,868: ERROR/ForkPoolWorker-1] simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55]: Simulation 'Test Simulation' task failed with error: Session.bulk_save_objects() got an unexpected keyword argument 'batch_size'
+[2024-09-24 11:19:13,872: INFO/MainProcess] Task simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55] received
+[2024-09-24 11:19:13,881: INFO/ForkPoolWorker-1] Task simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55] retry: Retry in 60s: TypeError("Session.bulk_save_objects() got an unexpected keyword argument 'batch_size'")
+[2024-09-24 11:19:45,561: INFO/ForkPoolWorker-1] simulation-queue[5ad6c07f-69dc-4c5f-83c0-0bbbd48b06db]: Running simulation: Test Simulation with count 1000 and seed 42
+[2024-09-24 11:19:48,793: ERROR/ForkPoolWorker-1] simulation-queue[5ad6c07f-69dc-4c5f-83c0-0bbbd48b06db]: Simulation 'Test Simulation' task failed with error: Session.bulk_save_objects() got an unexpected keyword argument 'batch_size'
+[2024-09-24 11:19:48,794: ERROR/ForkPoolWorker-1] simulation-queue[5ad6c07f-69dc-4c5f-83c0-0bbbd48b06db]: Max retries reached for task 5ad6c07f-69dc-4c5f-83c0-0bbbd48b06db. Marking as failed.
+[2024-09-24 11:19:48,879: INFO/ForkPoolWorker-1] Task simulation-queue[5ad6c07f-69dc-4c5f-83c0-0bbbd48b06db] succeeded in 3.3189167099999395s: 'Simulation \'Test Simulation\' failed after 3 retries.'
+[2024-09-24 11:20:13,867: INFO/ForkPoolWorker-1] simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55]: Running simulation: Test Simulation with count 1000 and seed 42
+[2024-09-24 11:20:22,235: ERROR/ForkPoolWorker-1] simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55]: Simulation 'Test Simulation' task failed with error: Session.bulk_save_objects() got an unexpected keyword argument 'batch_size'
+[2024-09-24 11:20:22,241: INFO/MainProcess] Task simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55] received
+[2024-09-24 11:20:22,258: INFO/ForkPoolWorker-1] Task simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55] retry: Retry in 60s: TypeError("Session.bulk_save_objects() got an unexpected keyword argument 'batch_size'")
+[2024-09-24 11:21:22,235: INFO/ForkPoolWorker-1] simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55]: Running simulation: Test Simulation with count 1000 and seed 42
+[2024-09-24 11:21:27,874: ERROR/ForkPoolWorker-1] simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55]: Simulation 'Test Simulation' task failed with error: Session.bulk_save_objects() got an unexpected keyword argument 'batch_size'
+[2024-09-24 11:21:27,881: ERROR/ForkPoolWorker-1] simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55]: Max retries reached for task 776ed7a9-5021-4890-8098-4b6569002e55. Marking as failed.
+[2024-09-24 11:21:28,322: INFO/ForkPoolWorker-1] Task simulation-queue[776ed7a9-5021-4890-8098-4b6569002e55] succeeded in 6.087598722000166s: 'Simulation \'Test Simulation\' failed after 3 retries.'
+[2024-09-24 11:23:38,367: INFO/MainProcess] Connected to redis://redis:6379//
+[2024-09-24 11:23:38,407: INFO/MainProcess] mingle: searching for neighbors
+[2024-09-24 11:23:39,449: INFO/MainProcess] mingle: all alone
+[2024-09-24 11:23:39,519: INFO/MainProcess] celery@797ff75dbc5a ready.
+[2024-09-24 11:23:50,014: INFO/MainProcess] Task simulation-queue[f90c18a2-c50a-4a9c-9255-5dae80e3a40b] received
+[2024-09-24 11:23:50,043: INFO/ForkPoolWorker-1] simulation-queue[f90c18a2-c50a-4a9c-9255-5dae80e3a40b]: Running simulation: Test Simulation with count 1000 and seed 42
+[2024-09-24 11:23:54,769: WARNING/ForkPoolWorker-1] An error occurred: (psycopg2.errors.NotNullViolation) null value in column "simulation_id" of relation "simulation_results" violates not-null constraint
+DETAIL:  Failing row contains (1, null, 1, 1, 0.675, 2024-09-24 11:23:50.322392).
 
-[2024-09-22 13:34:33,936: INFO/MainProcess] Connected to redis://redis:6379/0
-[2024-09-22 13:34:33,939: WARNING/MainProcess] /usr/local/lib/python3.12/site-packages/celery/worker/consumer/consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
-whether broker connection retries are made during startup in Celery 6.0 and above.
-If you wish to retain the existing behavior for retrying connections on startup,
-you should set broker_connection_retry_on_startup to True.
-  warnings.warn(
-
-[2024-09-22 13:34:33,949: INFO/MainProcess] mingle: searching for neighbors
-[2024-09-22 13:34:34,974: INFO/MainProcess] mingle: all alone
-[2024-09-22 13:34:35,020: INFO/MainProcess] celery@5e50127bd0c1 ready.
-[2024-09-22 13:50:06,709: WARNING/MainProcess] /usr/local/lib/python3.12/site-packages/celery/worker/consumer/consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
-whether broker connection retries are made during startup in Celery 6.0 and above.
-If you wish to retain the existing behavior for retrying connections on startup,
-you should set broker_connection_retry_on_startup to True.
-  warnings.warn(
-
-[2024-09-22 13:50:06,747: INFO/MainProcess] Connected to redis://redis:6379/0
-[2024-09-22 13:50:06,750: WARNING/MainProcess] /usr/local/lib/python3.12/site-packages/celery/worker/consumer/consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
-whether broker connection retries are made during startup in Celery 6.0 and above.
-If you wish to retain the existing behavior for retrying connections on startup,
-you should set broker_connection_retry_on_startup to True.
-  warnings.warn(
-
-[2024-09-22 13:50:06,764: INFO/MainProcess] mingle: searching for neighbors
-[2024-09-22 13:50:07,802: INFO/MainProcess] mingle: all alone
-[2024-09-22 13:50:07,850: INFO/MainProcess] celery@bfefef58cf17 ready.
-[2024-09-22 13:52:56,108: WARNING/MainProcess] /usr/local/lib/python3.12/site-packages/celery/worker/consumer/consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
-whether broker connection retries are made during startup in Celery 6.0 and above.
-If you wish to retain the existing behavior for retrying connections on startup,
-you should set broker_connection_retry_on_startup to True.
-  warnings.warn(
-
-[2024-09-22 13:52:56,121: INFO/MainProcess] Connected to redis://redis:6379/0
-[2024-09-22 13:52:56,123: WARNING/MainProcess] /usr/local/lib/python3.12/site-packages/celery/worker/consumer/consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
-whether broker connection retries are made during startup in Celery 6.0 and above.
-If you wish to retain the existing behavior for retrying connections on startup,
-you should set broker_connection_retry_on_startup to True.
-  warnings.warn(
-
-[2024-09-22 13:52:56,128: INFO/MainProcess] mingle: searching for neighbors
-[2024-09-22 13:52:57,149: INFO/MainProcess] mingle: all alone
-[2024-09-22 13:52:57,209: INFO/MainProcess] celery@c5b097ea7250 ready.
-[2024-09-22 14:22:55,557: WARNING/MainProcess] /usr/local/lib/python3.12/site-packages/celery/worker/consumer/consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
-whether broker connection retries are made during startup in Celery 6.0 and above.
-If you wish to retain the existing behavior for retrying connections on startup,
-you should set broker_connection_retry_on_startup to True.
-  warnings.warn(
-
-[2024-09-22 14:22:55,593: INFO/MainProcess] Connected to redis://redis:6379/0
-[2024-09-22 14:22:55,596: WARNING/MainProcess] /usr/local/lib/python3.12/site-packages/celery/worker/consumer/consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
-whether broker connection retries are made during startup in Celery 6.0 and above.
-If you wish to retain the existing behavior for retrying connections on startup,
-you should set broker_connection_retry_on_startup to True.
-  warnings.warn(
-
-[2024-09-22 14:22:55,607: INFO/MainProcess] mingle: searching for neighbors
-[2024-09-22 14:22:56,627: INFO/MainProcess] mingle: all alone
-[2024-09-22 14:22:56,648: INFO/MainProcess] celery@c7148f2a3558 ready.
-[2024-09-22 14:39:43,772: INFO/MainProcess] Connected to redis://redis:6379/0
-[2024-09-22 14:39:43,780: INFO/MainProcess] mingle: searching for neighbors
-[2024-09-22 14:39:44,814: INFO/MainProcess] mingle: all alone
-[2024-09-22 14:39:44,858: INFO/MainProcess] celery@b33ae33da65b ready.
-[2024-09-22 14:45:30,809: INFO/MainProcess] Connected to redis://redis:6379/0
-[2024-09-22 14:45:30,843: INFO/MainProcess] mingle: searching for neighbors
-[2024-09-22 14:45:31,908: INFO/MainProcess] mingle: all alone
-[2024-09-22 14:45:32,130: INFO/MainProcess] celery@c8c9d20c9dca ready.
-[2024-09-22 14:58:44,405: INFO/MainProcess] Connected to redis://redis:6379/0
-[2024-09-22 14:58:44,423: INFO/MainProcess] mingle: searching for neighbors
-[2024-09-22 14:58:45,445: INFO/MainProcess] mingle: all alone
-[2024-09-22 14:58:45,465: INFO/MainProcess] celery@713493b3f304 ready.
-[2024-09-22 23:53:03,820: INFO/MainProcess] Connected to redis://redis:6379//
-[2024-09-22 23:53:03,853: INFO/MainProcess] mingle: searching for neighbors
-[2024-09-22 23:53:04,906: INFO/MainProcess] mingle: all alone
-[2024-09-22 23:53:05,042: INFO/MainProcess] celery@8a9b4455befe ready.
-[2024-09-23 00:16:48,958: INFO/MainProcess] Connected to redis://redis:6379//
-[2024-09-23 00:16:48,968: INFO/MainProcess] mingle: searching for neighbors
-[2024-09-23 00:16:49,993: INFO/MainProcess] mingle: all alone
-[2024-09-23 00:16:50,084: INFO/MainProcess] celery@2959eefaacd5 ready.
-[2024-09-23 00:18:17,341: INFO/MainProcess] Task simulation-queue[02324286-a2b8-478a-b49d-2f7926d9fe7f] received
-[2024-09-23 00:18:30,990: WARNING/ForkPoolWorker-1] Successfully generated 48000 simulation results.
-[2024-09-23 00:18:31,092: INFO/ForkPoolWorker-1] Task simulation-queue[02324286-a2b8-478a-b49d-2f7926d9fe7f] succeeded in 13.727663825993659s: 'Simulation completed successfully.'
+[SQL: INSERT INTO simulation_results (llm_id, metric_id, value, timestamp) VALUES (%(llm_id__0)s, %(metric_id__0)s, %(value__0)s, %(timestamp__0)s), (%(llm_id__1)s, %(metric_id__1)s, %(value__1)s, %(timestamp__1)s), (%(llm_id__2)s, %(metric_id__2)s, %(valu ... 74284 characters truncated ... 98)s, %(timestamp__998)s), (%(llm_id__999)s, %(metric_id__999)s, %(value__999)s, %(timestamp__999)s)]
+[parameters: {'metric_id__0': 1, 'llm_id__0': 1, 'timestamp__0': datetime.datetime(2024, 9, 24, 11, 23, 50, 322392), 'value__0': 0.675, 'metric_id__1': 1, 'llm_id__1': 1, 'timestamp__1': datetime.datetime(2024, 9, 24, 11, 23, 50, 322618), 'value__1': 0.123, 'metric_id__2': 1, 'llm_id__2': 1, 'timestamp__2': datetime.datetime(2024, 9, 24, 11, 23, 50, 322723), 'value__2': 0.348, 'metric_id__3': 1, 'llm_id__3': 1, 'timestamp__3': datetime.datetime(2024, 9, 24, 11, 23, 50, 322810), 'value__3': 0.301, 'metric_id__4': 1, 'llm_id__4': 1, 'timestamp__4': datetime.datetime(2024, 9, 24, 11, 23, 50, 322930), 'value__4': 0.763, 'metric_id__5': 1, 'llm_id__5': 1, 'timestamp__5': datetime.datetime(2024, 9, 24, 11, 23, 50, 323004), 'value__5': 0.709, 'metric_id__6': 1, 'llm_id__6': 1, 'timestamp__6': datetime.datetime(2024, 9, 24, 11, 23, 50, 323088), 'value__6': 0.903, 'metric_id__7': 1, 'llm_id__7': 1, 'timestamp__7': datetime.datetime(2024, 9, 24, 11, 23, 50, 323192), 'value__7': 0.178, 'metric_id__8': 1, 'llm_id__8': 1, 'timestamp__8': datetime.datetime(2024, 9, 24, 11, 23, 50, 323303), 'value__8': 0.48, 'metric_id__9': 1, 'llm_id__9': 1, 'timestamp__9': datetime.datetime(2024, 9, 24, 11, 23, 50, 323366), 'value__9': 0.127, 'metric_id__10': 1, 'llm_id__10': 1, 'timestamp__10': datetime.datetime(2024, 9, 24, 11, 23, 50, 323423), 'value__10': 0.297, 'metric_id__11': 1, 'llm_id__11': 1, 'timestamp__11': datetime.datetime(2024, 9, 24, 11, 23, 50, 323481), 'value__11': 0.555, 'metric_id__12': 1, 'llm_id__12': 1 ... 3900 parameters truncated ... 'timestamp__987': datetime.datetime(2024, 9, 24, 11, 23, 50, 412667), 'value__987': 0.477, 'metric_id__988': 1, 'llm_id__988': 1, 'timestamp__988': datetime.datetime(2024, 9, 24, 11, 23, 50, 412798), 'value__988': 0.768, 'metric_id__989': 1, 'llm_id__989': 1, 'timestamp__989': datetime.datetime(2024, 9, 24, 11, 23, 50, 412846), 'value__989': 0.239, 'metric_id__990': 1, 'llm_id__990': 1, 'timestamp__990': datetime.datetime(2024, 9, 24, 11, 23, 50, 412883), 'value__990': 0.473, 'metric_id__991': 1, 'llm_id__991': 1, 'timestamp__991': datetime.datetime(2024, 9, 24, 11, 23, 50, 412919), 'value__991': 0.189, 'metric_id__992': 1, 'llm_id__992': 1, 'timestamp__992': datetime.datetime(2024, 9, 24, 11, 23, 50, 412954), 'value__992': 0.54, 'metric_id__993': 1, 'llm_id__993': 1, 'timestamp__993': datetime.datetime(2024, 9, 24, 11, 23, 50, 412991), 'value__993': 0.467, 'metric_id__994': 1, 'llm_id__994': 1, 'timestamp__994': datetime.datetime(2024, 9, 24, 11, 23, 50, 413023), 'value__994': 0.956, 'metric_id__995': 1, 'llm_id__995': 1, 'timestamp__995': datetime.datetime(2024, 9, 24, 11, 23, 50, 413055), 'value__995': 0.129, 'metric_id__996': 1, 'llm_id__996': 1, 'timestamp__996': datetime.datetime(2024, 9, 24, 11, 23, 50, 413087), 'value__996': 0.433, 'metric_id__997': 1, 'llm_id__997': 1, 'timestamp__997': datetime.datetime(2024, 9, 24, 11, 23, 50, 413119), 'value__997': 0.499, 'metric_id__998': 1, 'llm_id__998': 1, 'timestamp__998': datetime.datetime(2024, 9, 24, 11, 23, 50, 413151), 'value__998': 0.955, 'metric_id__999': 1, 'llm_id__999': 1, 'timestamp__999': datetime.datetime(2024, 9, 24, 11, 23, 50, 413183), 'value__999': 0.87}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+[2024-09-24 11:23:54,776: INFO/ForkPoolWorker-1] Task simulation-queue[f90c18a2-c50a-4a9c-9255-5dae80e3a40b] succeeded in 4.736445528000331s: 'Simulation \'Test Simulation\' completed successfully.'
+[2024-09-24 11:33:04,029: INFO/MainProcess] Connected to redis://redis:6379//
+[2024-09-24 11:33:04,050: INFO/MainProcess] mingle: searching for neighbors
+[2024-09-24 11:33:05,085: INFO/MainProcess] mingle: all alone
+[2024-09-24 11:33:05,139: INFO/MainProcess] celery@ac14b92808c2 ready.
+[2024-09-24 11:33:27,424: INFO/MainProcess] Task simulation-queue[9eac2649-e178-4bd3-ba52-0752d981337d] received
+[2024-09-24 11:33:27,486: INFO/ForkPoolWorker-1] simulation-queue[9eac2649-e178-4bd3-ba52-0752d981337d]: Running simulation: LLM Simulation with count 1000 and seed 42
+[2024-09-24 11:33:47,442: WARNING/ForkPoolWorker-1] Successfully generated 48000 simulation results.
+[2024-09-24 11:33:47,543: INFO/ForkPoolWorker-1] Task simulation-queue[9eac2649-e178-4bd3-ba52-0752d981337d] succeeded in 20.059473219999745s: 'Simulation \'LLM Simulation\' completed successfully.'

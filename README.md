@@ -1,6 +1,13 @@
-# LLM Benchmark Simulation Api
+# LLM Benchmark Simulation API
 
-LLM Benchmark Simulation and Infrastructure Deployment
+This project provides a benchmarking simulation system for evaluating Large Language Models (LLMs) on different performance metrics. It supports infrastructure deployment, simulations with Celery, and API-based interaction for LLM ranking.
+
+Features
+Simulate multiple performance metrics (e.g., TTFT, TPS, e2e_latency, RPS) for various LLMs.
+API-based interaction to trigger simulations and retrieve rankings.
+Asynchronous task handling with Celery and Redis.
+PostgreSQL as the primary database.
+Supports scaling simulations and monitoring with task retry mechanisms.
 
 ## Getting Started
 
@@ -16,61 +23,82 @@ LLM Benchmark Simulation and Infrastructure Deployment
 
 1. **Clone the repository:**
 
-    ```bash
-    git clone https://github.com/Hudeh/llm-benchmark.git
-    cd llm-benchmark
-    ```
+   ```bash
+   git clone https://github.com/Hudeh/llm-benchmark.git
+   cd llm-benchmark
+   ```
+
+2. **Configure environment variables:**
+
+   Rename env_sample to .env and update the values as needed:
+
+   ```bash
+   mv env_sample .env
+   ```
 
 ### Running the Project
 
-Change the env_sample file name to .env:
+Using Docker Compose
+The easiest way to run the project is by using Docker Compose, which will set up all services automatically
 
-1. **Using docker compose**
+1. **Build and start services:**
 
-    ```bash
-    docker-compose up --build
-    ```
+   ```bash
+   docker-compose up --build
+   ```
 
-    This command will start the following services:
+   Services included in the Docker Compose setup:
 
-    FastAPI server on <http://localhost:8000>
-    PostgreSQL for the database.
-    Redis as the Celery message broker.
-    Access the API documentation at <http://localhost:8000/docs>
+   FastAPI server: Runs on <http://localhost:8000>
+   PostgreSQL: For database storage
+   Redis: Message broker for Celery tasks
+   Celery workers: For handling asynchronous simulation tasks
+   Celery Beat: For task scheduling
 
-2. **Running FastAPI Locally**
+2. **Access the API Documentation:**
 
-## Set up a Python virtual environment
+   Once the services are running, you can access the auto-generated Swagger UI documentation at:
 
-```bash
-python -m venv venv
-source venv/bin/activate
-```
+   <http://localhost:8000/docs>
 
-## Install dependencies
+Running Locally (Without Docker)
+If you prefer to run the project locally, follow these steps
 
-```bash
-pip install -r requirements.txt
-```
+1. **Set up a Python virtual environment:**
 
-## Run the FastAPI server
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # For Linux/Mac
+   ```
 
-```bash
-uvicorn app.main:app --reload
+   ```bash
+   python -m venv venv
+   venv/Scripts/activate # For windows
+   ```
 
-```
+2. **Install dependencies**
 
-## Start Celery worker
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```bash
-celery -A app.tasks.celery_tasks worker --loglevel=info
-```
+3. **Run FastAPI server:**
 
-## Start Celery Beat
+   ```bash
+   uvicorn app.main:app --reload
+   ```
 
-```bash
-celery -A app.tasks.celery_tasks beat --loglevel=info
-```
+4. **Start Celery workers:**
+
+   ```bash
+   celery -A app.tasks.celery_tasks worker --loglevel=info
+   ```
+
+5. **Start Celery Beat (for scheduled tasks):**
+
+   ```bash
+   celery -A app.tasks.celery_tasks beat --loglevel=info
+   ```
 
 ## Database Migrations
 
@@ -78,24 +106,98 @@ celery -A app.tasks.celery_tasks beat --loglevel=info
 alembic upgrade head
 ```
 
-## Sample Output
+## API Endpoints
 
-GET /api/v1/rankings/TTFT/
+The API allows interaction with the simulation system through the following endpoints:
 
-[
-    {
-        "llm": "GPT-4o",
-        "mean_value": 0.523,
-        "rank": 1
-    },
-    {
-        "llm": "Llama 3.1 405",
-        "mean_value": 0.612,
-        "rank": 2
-    },
-    {
-        "llm": "Mistral Large2",
-        "mean_value": 0.745,
-        "rank": 3
-    }
-]
+1. **Trigger a new simulation:**
+
+   ```bash
+   POST /run-simulation/
+   ```
+
+   Request body example:
+
+   ```json
+   {
+     "simulation_name": "Test Simulation",
+     "count": 1000,
+     "seed": 42
+   }
+   ```
+
+   Response
+
+   ```json
+   {
+     "task_id": "unique_task_id",
+     "status": "Task submitted successfully.",
+     "simulation_name": "Test Simulation"
+   }
+   ```
+
+2. **Check the status of a Celery task:**
+
+   ```bash
+   GET /task-status/{task_id}
+   ```
+
+   Response example:
+
+   ```json
+   {
+     "task_id": "unique_task_id",
+     "status": "SUCCESS",
+     "result": "Simulation 'Test Simulation' completed successfully."
+   }
+   ```
+
+3. **Get LLM rankings for a specific metric:**
+
+   ```bash
+   GET /api/v1/rankings/{metric_name}/
+   ```
+
+   Example response:
+
+   ```json
+   [
+     {
+       "llm": "GPT-4o",
+       "mean_value": 0.523,
+       "rank": 1
+     },
+     {
+       "llm": "Llama 3.1 405",
+       "mean_value": 0.612,
+       "rank": 2
+     },
+     {
+       "llm": "Mistral Large2",
+       "mean_value": 0.745,
+       "rank": 3
+     }
+   ]
+   ```
+
+## Dashboard Visualization
+
+1. **Set Up React Project**
+
+   ```bash
+   cd llm-benchmark-dashboard
+   ```
+
+2. **Install Required Dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Run Your Application**
+
+   Finally, start your React application
+
+   ```bash
+   npm start
+   ```

@@ -1,86 +1,81 @@
 import random
 from datetime import datetime
 from sqlalchemy.orm import Session
-from models.models import LLM, Metric, SimulationResult
+from models.models import LLM, Metric, SimulationResult, Simulation
 from db.session import SessionLocal
+from core.config import settings
 
-# Seed for reproducibility
-RANDOM_SEED = 42
-random.seed(RANDOM_SEED)
 
 def generate_metric_value(metric_name: str) -> float:
+    """Dynamically generate values based on the metric name."""
     if metric_name == "TTFT":
-        return round(random.uniform(0.1, 1.0), 3)  # in seconds
+        return round(random.uniform(0.1, 1.0), 3)  # Time to First Token
     elif metric_name == "TPS":
-        return round(random.uniform(10, 1000), 2)  # tokens per second
+        return round(random.uniform(10, 1000), 2)  # Tokens Per Second
     elif metric_name == "e2e_latency":
-        return round(random.uniform(50, 500), 2)  # in milliseconds
+        return round(random.uniform(50, 500), 2)  # End-to-End Latency
     elif metric_name == "RPS":
-        return round(random.uniform(1, 100), 2)  # requests per second
+        return round(random.uniform(1, 100), 2)  # Requests Per Second
     else:
-        return 0.0
+        return round(random.uniform(0, 100), 2)  # Default value for unknown metrics
 
-def run_simulation(count: int = 1000, seed: int = None):
+
+def run_simulation(simulation_name: str, count: int = 1000, seed: int = None):
     if seed is not None:
         random.seed(seed)
 
     db: Session = SessionLocal()
 
-    llm_names = [
-        "GPT-4o",
-        "Llama 3.1 405",
-        "Mistral Large2",
-        "Claude 3.5 Sonnet",
-        "Gemini 1.5 Pro",
-        "GPT-4o mini",
-        "Llama 3.1 70B",
-        "amba 1.5Large",
-        "Mixtral 8x22B",
-        "Gemini 1.5Flash",
-        "Claude 3 Haiku",
-        "Llama 3.1 8B"
-    ]
+    try:
+        # Create a new Simulation record
+        simulation = Simulation(
+            name=simulation_name, timestamp=datetime.utcnow(), seed=seed
+        )
+        db.add(simulation)
+        db.flush()
 
-    metric_names = [
-        "TTFT",
-        "TPS",
-        "e2e_latency",
-        "RPS"
-    ]
+        # Ensure LLMs and Metrics exist, allowing dynamic addition of new ones
+        for name in settings.LLM_NAMES:
+            llm = db.query(LLM).filter(LLM.name == name).first()
+            if not llm:
+                llm = LLM(name=name)
+                db.add(llm)
 
-    # Ensure LLMs and Metrics exist
-    for name in llm_names:
-        llm = db.query(LLM).filter(LLM.name == name).first()
-        if not llm:
-            llm = LLM(name=name)
-            db.add(llm)
+        for name in settings.METRICS_NAMES:
+            metric = db.query(Metric).filter(Metric.name == name).first()
+            if not metric:
+                metric = Metric(name=name)
+                db.add(metric)
 
-    for name in metric_names:
-        metric = db.query(Metric).filter(Metric.name == name).first()
-        if not metric:
-            metric = Metric(name=name)
-            db.add(metric)
+        db.commit()
 
-    db.commit()
+        # Retrieve LLMs and Metrics from the database
+        llms = db.query(LLM).all()
+        metrics = db.query(Metric).all()
 
-    llms = db.query(LLM).all()
-    metrics = db.query(Metric).all()
+        simulation_results = []
+        for llm in llms:
+            for metric in metrics:
+                for _ in range(count):
+                    value = generate_metric_value(metric.name)
+                    simulation_result = SimulationResult(
+                        llm_id=llm.id,
+                        metric_id=metric.id,
+                        value=value,
+                        timestamp=datetime.utcnow(),
+                        simulation_id=simulation.id,
+                    )
+                    simulation_results.append(simulation_result)
 
-    simulation_results = []
-    for llm in llms:
-        for metric in metrics:
-            for _ in range(count):
-                value = generate_metric_value(metric.name)
-                simulation = SimulationResult(
-                    llm_id=llm.id,
-                    metric_id=metric.id,
-                    value=value,
-                    timestamp=datetime.utcnow()
-                )
-                simulation_results.append(simulation)
+        # Bulk save the simulation results
+        db.bulk_save_objects(simulation_results)
+        db.commit()
 
-    db.bulk_save_objects(simulation_results, batch_size=1000)
-    db.commit()
-    db.close()
-
-    print(f"Successfully generated {count * len(llms) * len(metrics)} simulation results.")
+        print(
+            f"Successfully generated {count * len(llms) * len(metrics)} simulation results."
+        )
+    except Exception as e:
+        db.rollback()
+        print(f"An error occurred: {e}")
+    finally:
+        db.close()

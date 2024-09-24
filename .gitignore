@@ -3,5 +3,3 @@
 history*
 venv/
 .env
-helm
-scripts
