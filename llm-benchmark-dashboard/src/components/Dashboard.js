@@ -4,7 +4,6 @@ import MetricChart from './MetricChart';
 
 const Dashboard = () => {
   const [metrics, setMetrics] = useState([]);
-  const [metricName, setMetricName] = useState('');
   const [rankings, setRankings] = useState({});
 
   useEffect(() => {
@@ -30,7 +29,6 @@ const Dashboard = () => {
             key={metric.name}
             onClick={() => {
               handleMetricClick(metric.name);
-              setMetricName(metric.name);
             }}
             style={{
               cursor: 'pointer',
