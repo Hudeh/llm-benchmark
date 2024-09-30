@@ -30,5 +30,4 @@ class Settings(BaseSettings):
         env_file = ".env"
 
 
-# Instantiate settings
 settings = Settings()

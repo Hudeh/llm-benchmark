@@ -1,4 +1,5 @@
 from fastapi.testclient import TestClient
+from datetime import datetime
 from app.main import app
 from app.db.session import SessionLocal
 from app.models.models import Metric, LLM, SimulationResult, Ranking
@@ -25,7 +26,7 @@ def test_get_rankings_success():
     db.commit()
     db.close()
 
-    response = client.get("/api/v1/rankings/TTFT/")
+    response = client.get("/api/v1/rankings/TPS/")
     assert response.status_code == 200
     assert len(response.json()) >= 1
     assert response.json()[0]["llm"] == "Test LLM"

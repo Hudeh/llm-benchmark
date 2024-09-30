@@ -1,19 +1,16 @@
-
 services:
 
   db:
     restart: "on-failure"
-    image: postgres:15.1-alpine
+    image: postgres:16-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    expose:
-      - 5432
     env_file:
       - ./.env
 
   redis:
     restart: "on-failure"
-    image: redis:7.2-rc3-alpine
+    image: redis:alpine
     ports:
       - "6379:6379"
     volumes:
@@ -21,9 +18,9 @@ services:
 
   api: &api
     build:
-      context: .
-      dockerfile: docker/api/Dockerfile
-    image: llm_benchmark-api
+      context: ./app
+      dockerfile: docker/api.Dockerfile
+    image: llm-benchmark-api
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
     volumes:
       - ./app:/app
@@ -73,27 +70,16 @@ services:
       - celery
       - redis
 
-  llm-frontend:
+  llm-dashboard:
     build:
-      context: .
-      dockerfile: docker/frontend/Dockerfile
-    image: llm_benchmark-app
+      context: ./frontend
+      dockerfile: docker/frontend.Dockerfile
+    container_name: llm-benchmark-dashboard
     ports:
-      - "3000:3000"
-    volumes:  
-      - .:/app:delegated 
-      - /app/node_modules  
-    env_file:
-      - ./.env
-    command: sh -c "npm start"
-    restart: always
-    networks:
-      - webnet
+      - "3000:80"
+    depends_on:
+      - api
 
 volumes:
   postgres_data:
   redisdata:
-   
-networks:
-  webnet:
-    driver: bridge
