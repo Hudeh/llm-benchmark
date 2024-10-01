@@ -19,7 +19,7 @@ services:
   api: &api
     build:
       context: ./app
-      dockerfile: docker/api.Dockerfile
+      dockerfile: api.Dockerfile
     image: llm-benchmark-api
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
     volumes:
@@ -73,7 +73,7 @@ services:
   llm-dashboard:
     build:
       context: ./frontend
-      dockerfile: docker/frontend.Dockerfile
+      dockerfile: frontend.Dockerfile
     container_name: llm-benchmark-dashboard
     ports:
       - "3000:80"
