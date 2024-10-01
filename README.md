@@ -18,6 +18,7 @@ Supports scaling simulations and monitoring with task retry mechanisms.
 - Docker Compose
 - Redis
 - PostgreSQL
+- Node
 
 ### Installation
 
