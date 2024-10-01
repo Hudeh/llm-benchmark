@@ -1,5 +1,6 @@
-services:
+version: '3.8'
 
+services:
   db:
     restart: "on-failure"
     image: postgres:16-alpine
@@ -16,7 +17,7 @@ services:
     volumes:
       - redisdata:/data
 
-  api: &api
+  api: &api_service
     build:
       context: ./app
       dockerfile: api.Dockerfile
@@ -32,43 +33,31 @@ services:
     depends_on:
       - db
       - redis
-    
-  celery:
-    <<: *api
+
+  celery-worker:
+    <<: *api_service
     command: celery --app=tasks.celery_tasks worker -l info --logfile=logs/celery_worker.log -E
-    ports: []
-    volumes:
-      - ./app:/app
-    env_file:
-      - ./.env
     depends_on:
-      - api 
+      - db
       - redis
 
   celery-beat:
-    <<: *api
+    <<: *api_service
     command: celery --app=tasks.celery_tasks beat -l info --logfile=logs/celery_beat.log
-    ports: []
-    volumes:
-      - ./app:/app
-    env_file:
-      - ./.env
     depends_on:
-      - api
-      - celery
+      - db
       - redis
+      - celery-worker
 
   flower-dashboard:
-    <<: *api
+    <<: *api_service
     command: celery --broker=redis://redis:6379 flower --port=5555
     ports:
-       - 5555:5555
-    env_file:
-      - ./.env
+      - '5555:5555'
     depends_on:
-      - api
-      - celery
+      - db
       - redis
+      - celery-worker
 
   llm-dashboard:
     build:
