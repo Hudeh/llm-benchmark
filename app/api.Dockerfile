@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Copy only the requirements file to leverage Docker cache
-COPY ./app/requirements.txt .
+COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip install --upgrade pip && \
@@ -44,7 +44,7 @@ COPY --from=builder /wheels /wheels
 RUN pip install --upgrade pip && pip install --no-cache /wheels/*
 
 # Copy the application code
-COPY ./app /app
+COPY . .
 
 # Set proper permissions for the app directory
 RUN chown -R app:app /app
