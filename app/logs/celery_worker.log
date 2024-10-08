@@ -1,0 +1,16 @@
+[2024-10-01 15:47:01,974: INFO/MainProcess] Connected to redis://redis:6379//
+[2024-10-01 15:47:01,985: INFO/MainProcess] mingle: searching for neighbors
+[2024-10-01 15:47:03,035: INFO/MainProcess] mingle: all alone
+[2024-10-01 15:47:03,109: INFO/MainProcess] celery@c74f3bd94880 ready.
+[2024-10-01 18:59:15,045: INFO/MainProcess] Connected to redis://redis:6379//
+[2024-10-01 18:59:15,079: INFO/MainProcess] mingle: searching for neighbors
+[2024-10-01 18:59:16,228: INFO/MainProcess] mingle: all alone
+[2024-10-01 18:59:16,281: INFO/MainProcess] celery@f65938c1d725 ready.
+[2024-10-01 21:17:08,382: INFO/MainProcess] Connected to redis://redis:6379//
+[2024-10-01 21:17:08,422: INFO/MainProcess] mingle: searching for neighbors
+[2024-10-01 21:17:09,479: INFO/MainProcess] mingle: all alone
+[2024-10-01 21:17:09,506: INFO/MainProcess] celery@fb32cadbfecd ready.
+[2024-10-01 21:17:41,933: INFO/MainProcess] Task simulation-queue[1f28f319-4f01-48e0-a5bb-da80f63edac5] received
+[2024-10-01 21:17:41,939: INFO/ForkPoolWorker-1] simulation-queue[1f28f319-4f01-48e0-a5bb-da80f63edac5]: Running simulation: Test with count 1000 and seed 42
+[2024-10-01 21:17:58,609: WARNING/ForkPoolWorker-1] Successfully generated 48000 simulation results.
+[2024-10-01 21:17:59,069: INFO/ForkPoolWorker-1] Task simulation-queue[1f28f319-4f01-48e0-a5bb-da80f63edac5] succeeded in 17.131599279999136s: 'Simulation \'Test\' completed successfully.'

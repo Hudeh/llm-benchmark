@@ -1,7 +1,7 @@
 services:
   db:
     restart: "on-failure"
-    image: postgres:16-alpine
+    image: postgres:15.1-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
@@ -35,6 +35,7 @@ services:
   celery-worker:
     <<: *api_service
     command: celery --app=tasks.celery_tasks worker -l info --logfile=logs/celery_worker.log -E
+    ports: []
     depends_on:
       - db
       - redis
@@ -42,6 +43,7 @@ services:
   celery-beat:
     <<: *api_service
     command: celery --app=tasks.celery_tasks beat -l info --logfile=logs/celery_beat.log
+    ports: []
     depends_on:
       - db
       - redis
@@ -61,7 +63,6 @@ services:
     build:
       context: ./frontend
       dockerfile: frontend.Dockerfile
-    container_name: llm-benchmark-dashboard
     ports:
       - "3000:80"
     depends_on:
